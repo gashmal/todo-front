@@ -1,28 +1,37 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import axios from "axios";
 
+import "./App.css";
+import Title from "./components/Title";
+import ToDoForm from "./components/ToDoForm";
+import ListItem from "./components/ListItem";
 class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
-  }
+	state = {
+		tasks: []
+	};
+
+	updateList = () => {
+		axios.get("https://todo-back.herokuapp.com/").then(response => {
+			console.log(response.data);
+			this.setState({
+				tasks: response.data
+			});
+		});
+	};
+
+	render() {
+		return (
+			<div className="App">
+				<Title title="To-Do list" />
+				<ListItem list={this.state.tasks} update={this.updateList} />
+				<ToDoForm update={this.updateList} />
+			</div>
+		);
+	}
+
+	componentDidMount() {
+		this.updateList();
+	}
 }
 
 export default App;
