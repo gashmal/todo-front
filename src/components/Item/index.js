@@ -4,7 +4,9 @@ import axios from "axios";
 export default class Item extends PureComponent {
 	finishedOrNot = () => {
 		axios
-			.post(`https://todo-back.herokuapp.com/update/${this.props.item._id}`)
+			.post(`https://todo-back.herokuapp.com/update/${this.props.item._id}`, {
+				finished: !this.props.item.finished
+			})
 			.then(response => {
 				console.log(response.data);
 				this.props.update();
@@ -24,21 +26,24 @@ export default class Item extends PureComponent {
 		if (this.props.item && this.props.item.description) {
 			if (this.props.item.finished === false) {
 				return (
-					<div>
-						<span onClick={this.removeTheBaye}>----X----</span>
+					<h4>
+						<span onClick={this.removeTheBaye}>X </span>
 						<span onClick={this.finishedOrNot}>
-							{this.props.item.description + " à faire"}
+							{this.props.item.description}
 						</span>
-					</div>
+					</h4>
 				);
 			} else {
 				return (
-					<div>
-						<span onClick={this.removeTheBaye}>----X----</span>
-						<span onClick={this.finishedOrNot}>
-							{this.props.item.description + " fait"}
+					<h4 style={{ color: "lightgray" }}>
+						<span onClick={this.removeTheBaye}>X </span>
+						<span
+							style={{ textDecoration: "line-through" }}
+							onClick={this.finishedOrNot}
+						>
+							{this.props.item.description}
 						</span>
-					</div>
+					</h4>
 				);
 			}
 		} else return null;

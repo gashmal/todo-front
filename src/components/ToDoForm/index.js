@@ -20,19 +20,22 @@ export default class ToDoForm extends Component {
 				console.log(response.data);
 				this.setState({ task: "" });
 				this.props.update();
-			}); // cette ligne est indispensable pour empêcher le navigateur de changer de page automatiquement lorsque le formulaire est soumis.
+			});
 	};
 
 	render() {
 		return (
 			<div>
 				<form onSubmit={this.handleSubmit}>
-					<input
-						type="text"
-						name="task"
-						value={this.state.task}
-						onChange={this.handleTaskChange}
-					/>
+					<div>
+						<input
+							type="text"
+							name="task"
+							value={this.state.task}
+							onChange={this.handleTaskChange}
+							placeholder="Titre"
+						/>
+					</div>
 					<button type="submit">Ajouter Une Tâche</button>
 				</form>
 			</div>

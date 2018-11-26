@@ -5,10 +5,13 @@ export class ListItem extends Component {
 	render() {
 		return (
 			<div>
-				<h2>list item</h2>
-				{this.props.list.map(task => (
-					<Item key={task._id} item={task} update={this.props.update} />
-				))}
+				{this.props.list
+					.sort(function(x, y) {
+						return x.finished === y.finished ? 0 : x.finished ? 1 : -1;
+					})
+					.map(task => (
+						<Item key={task._id} item={task} update={this.props.update} />
+					))}
 			</div>
 		);
 	}

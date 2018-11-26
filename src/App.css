@@ -1,3 +1,33 @@
 .App {
   color: gray;
+  margin: 20px;
+}
+
+button {
+  background-color: blueviolet;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 15px;
+  padding: 3px 10px;
+  box-sizing: border-box;
+}
+
+input {
+  border-radius: 5px;
+  border: 1px solid gray;
+  margin: 10px 0px;
+}
+
+input::placeholder {
+  padding-left: 7px;
+}
+
+input:focus {
+  outline: none;
+  border: 1px solid blueviolet;
+}
+
+h4 {
+  cursor: pointer;
 }
